@@ -61,8 +61,6 @@ function App() {
 
   return (
     <>
-
-
       <AuthProvider>
         {/* <Navbar /> */}
         <div style={{ margin: '2em' }}>

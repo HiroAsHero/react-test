@@ -1,20 +1,26 @@
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const handleSubmit = (event) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async(event) => {
         event.preventDefault();
         const { email, password } = event.target.elements;
-        signInWithEmailAndPassword(auth, email.value, password.value)
+        await signInWithEmailAndPassword(auth, email.value, password.value)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                console.log(user);
+                navigate('/');
                 // ...
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
                 // ..
             });
     };
